@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>أركانات | نماذج المسح الأمني</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            direction: rtl;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            background: #ffffff;
+            width: 420px;
+            margin: 100px auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+            border-top: 6px solid #b11226; /* أحمر أركانات */
+        }
+
+        h2 {
+            color: #b11226;
+            margin-bottom: 10px;
+        }
+
+        h4 {
+            color: #333;
+            margin-bottom: 25px;
+            font-weight: normal;
+        }
+
+        select, button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 12px;
+            font-size: 14px;
+            border-radius: 5px;
+        }
+
+        select {
+            border: 1px solid #121010;
+        }
+
+        button {
+            background-color: #b11226;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background-color: #8f0e1f;
+        }
+
+        /* زر الفتح يظهر بعد الاختيار */
+        #openBtn {
+            display: none;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #666;
+        }
+        .logo {
+    width: 120px;
+    margin-bottom: 15px;
+}
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <img src="arkanat-logo.png" alt="Arkanat Logo" class="logo">
+    <h2>أركانات للحراسات الامنية</h2>
+    <h4>نظام نماذج المسح الأمني</h4>
+
+    <select id="formType">
+        <option value="">— اختر نوع المسح الأمني —</option>
+        <option value="warehouse">مستودعات</option>
+        <option value="health">منشآت صحية</option>
+        <option value="commercial">مواقع عامة وتجارية</option>
+        <option value="industrial">مواقع صناعية وبنية تحتية</option>
+        <option value="projects">مواقع مشاريع وإنشاءات</option>
+        <option value="education">مواقع تعليمية</option>
+        <option value="events">فعاليات وأماكن تجمع</option>
+        <option value="residential">مواقع سكنية وخاصة</option>
+        <option value="sensitive">مواقع خاصة وحساسة</option>
+    </select>
+
+    <!-- زر اختيار -->
+    <button type="button" onclick="selectForm()">اختيار</button>
+
+    <!-- زر فتح الرابط (يظهر بعد اختيار النموذج) -->
+    <button type="button" id="openBtn" onclick="openSelectedForm()">اضغط هنا لفتح النموذج</button>
+
+    <div class="footer">
+        © Arkanat Security Services
+    </div>
+</div>
+
+<script>
+let selectedUrl = "";
+
+// ✅ هنا احط روابط كل نموذج (حط روابط Google Forms بدل PLACEHOLDER)
+const forms = {
+    warehouse: "https://forms.gle/pNz4BWKbUuUcwVxP9",   // مثل: https://docs.google.com/forms/d/e/.....
+    health: "https://forms.gle/gXXhH4KxGwgJpPuF6",
+    commercial: "https://forms.gle/91aH2b2r7Q7E2FTE9",
+    industrial: "https://forms.gle/aRX3HR3bRShqrhZc8",
+    projects: "https://forms.gle/56KRDkMjWaabboHp8",
+    education: "https://forms.gle/zw7912R9QVxp93KB9",
+    events: "https://forms.gle/sv9FRQjNWnYv7NdH6",
+    residential: "https://forms.gle/hcpbgUmWU2h5jmRu6",
+    sensitive: "https://forms.gle/bnRPgwiAowTE4Xqc8",
+};
+
+function selectForm() {
+    const type = document.getElementById("formType").value;
+
+    if (type === "") {
+        alert("يرجى اختيار نوع المسح الأمني");
+        return;
+    }
+
+    selectedUrl = forms[type];
+
+    // احتياط لو نسيتي تحطين رابط
+    if (!selectedUrl || selectedUrl.includes("PLACEHOLDER")) {
+        alert("لم يتم إضافة رابط هذا النموذج بعد. ضعي رابط Google Form في الكود.");
+        return;
+    }
+
+    // إظهار زر الفتح بعد نجاح الاختيار
+    document.getElementById("openBtn").style.display = "block";
+}
+
+function openSelectedForm() {
+    if (!selectedUrl) {
+        alert("اختاري نموذج أولاً ثم اضغطي اختيار");
+        return;
+    }
+    window.open(selectedUrl, "_blank");
+}
+</script>
+
+</body>
+</html>
